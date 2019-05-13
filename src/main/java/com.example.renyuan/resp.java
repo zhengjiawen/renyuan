@@ -13,6 +13,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -90,21 +91,23 @@ public class resp {
                 else if(info.equals("map3")) {
                     OutputStream outputStream=socket.getOutputStream();//获取一个输出流，向服务端发送信息
                     PrintWriter printWriter=new PrintWriter(outputStream);//将输出流包装成打印流
-                    // 读取文件代码
-                    FileInputStream freader1;
-                    freader1 = new FileInputStream("src/main/resources/data.txt");
-                    try {
-                        // 准备读取文件
-                        InputStreamReader read = new InputStreamReader(freader1);
-                        // 读取文件流
-                        BufferedReader bufferedReader1 = new BufferedReader(read);
-                        data= bufferedReader1.readLine();
-                        freader1.close();}
-                    catch (Exception e) {
-                        System.out.println("读取文件内容出错");
-                        e.printStackTrace();
-                    }
-                    printWriter.print(data);
+//                    // 读取文件代码
+//                    FileInputStream freader1;
+//                    freader1 = new FileInputStream("src/main/resources/data.txt");
+//                    try {
+//                        // 准备读取文件
+//                        InputStreamReader read = new InputStreamReader(freader1);
+//                        // 读取文件流
+//                        BufferedReader bufferedReader1 = new BufferedReader(read);
+//                        data= bufferedReader1.readLine();
+//                        freader1.close();}
+//                    catch (Exception e) {
+//                        System.out.println("读取文件内容出错");
+//                        e.printStackTrace();
+//                    }
+                    add.initData3();
+                    String str = Arrays.toString(add.DATA3);
+                    printWriter.print(str);
 
                     printWriter.flush();
 

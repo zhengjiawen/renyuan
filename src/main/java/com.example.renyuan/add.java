@@ -430,18 +430,20 @@ public class add {
     }
 
     public static void initData3() {
+        initData4();
         //记事本路径地址
         String s1 = "src/main/resources/data";
         String s2;
         String s3 = ".txt";
         String s;
         int t = 30000; //记事本名字.
-        while (p != 1001) {
+//        while (p != 1001) {
+        if(p != 0){
             String data = null;
             for (int i = 0; i < p; i++) {
                 s2 = String.valueOf(t + i);
-                s = s1 + s2 + s3;
-//                s = s1+s3;
+//                s = s1 + s2 + s3;
+                s = s1+s3;
                 String filePath = s;
                 File f = new File(s);
 
@@ -515,6 +517,52 @@ public class add {
             }
         }
 
+    }
+
+    public static void initData4()
+    {
+        //输入设置文件
+        FileInputStream freader;
+        try {
+            freader = new FileInputStream("src/main/resources/setDTU.txt");
+            ObjectInputStream objectInputStream = new ObjectInputStream(freader);
+            map1 = (HashMap<String, String>) objectInputStream.readObject();
+            freader.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        Iterator<Entry<String, String>> iter = map1.entrySet().iterator();
+        while (iter.hasNext()) {
+            Map.Entry entry = iter.next();
+            Object key = entry.getKey();
+            Object val = entry.getValue();
+            String i = String.valueOf(key);
+            String j = String.valueOf(val);
+            String[] xinxi = j.split("%%");
+            MAN.put(xinxi[14], i + "%%" + MAN.get(xinxi[14]));
+            MAN1.put(xinxi[15], i + "%%" + MAN1.get(xinxi[15]));
+            WORKER.put(xinxi[14], xinxi[3]);//维修员+客户端端口
+            MANAGER.put(xinxi[15], xinxi[13]);//主管+客户端端口
+            DATA1.put(i, xinxi[8]);
+            DATA2.put(i, xinxi[11]);
+            DATAname1.put(i, xinxi[7]);
+            DATAname2.put(i, xinxi[10]);
+            adress.put(i, xinxi[2]);
+            DATA5[p] = i;
+            DATA4[p] = "设备端口号：" + i + ";" + "\n" + "设备-经纬度：" + xinxi[0] + "," + xinxi[1] + ";" + "\n" + "设备地址:" + xinxi[2]
+                    + ";" + "\n" + "设备维修员及电话：" + xinxi[3] + "," + xinxi[4] + ";" + "\n" + "设备电话及有效日期：" + xinxi[5] + "," + xinxi[6]
+                    + ";" + "\n" + "数据1名称：" + xinxi[7] + ";" + "\n" + "数据1报警值：" + xinxi[8] + ";" + "\n" + "数据1说明：" + xinxi[9]
+                    + ";" + "\n" + "数据2名称：" + xinxi[10] + ";" + "\n" + "数据2报警值：" + xinxi[11] + ";" + "\n" + "数据2说明：" + xinxi[12]
+                    + ";" + "\n" + "主管：" + xinxi[13];
+            p++;
+        }
     }
 
 }
